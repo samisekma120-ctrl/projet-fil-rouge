@@ -42,8 +42,15 @@ jobs:
       # ===== DOCKER BUILD =====
       - name: Build backend Docker image
         run: |
-          docker build -t backend-ci-test -f backend/Dockerfile .
+          docker build \
+            -t backend-ci-test \
+            -f /home/azureuser/CloudNativeApplicationCurse/backend/Dockerfile \
+            /home/azureuser/CloudNativeApplicationCurse
 
       - name: Build frontend Docker image
         run: |
-          docker build -t frontend-ci-test -f frontend/Dockerfile .
+          docker build \
+            -t frontend-ci-test \
+            -f /home/azureuser/CloudNativeApplicationCurse/frontend/Dockerfile \
+            /home/azureuser/CloudNativeApplicationCurse
+
