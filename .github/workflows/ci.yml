@@ -1,19 +1,41 @@
-name: CI - Basic Test
+name: CI
 
 on:
   push:
     branches: [ main ]
-  workflow_dispatch:
+  pull_request:
 
 jobs:
-  test-runner:
+  build-and-test:
     runs-on: self-hosted
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Test runner output
-        run: |
-          echo "🎉 Le runner self-hosted fonctionne !"
-          pwd
+      # BACKEND
+      - name: Install backend dependencies
+        working-directory: backend
+        run: npm install
+
+      - name: Test backend
+        working-directory: backend
+        run: npm test --if-present
+
+      - name: Lint backend
+        working-directory: backend
+        run: npm run lint --if-present
+
+      # FRONTEND
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: npm install
+
+      - name: Test frontend
+        working-directory: frontend
+        run: npm test --if-present
+
+      - name: Lint frontend
+        working-directory: frontend
+        run: npm run lint --if-present
+
