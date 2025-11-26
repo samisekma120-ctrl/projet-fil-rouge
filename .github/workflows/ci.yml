@@ -45,12 +45,11 @@ jobs:
           docker build \
             -t backend-ci-test \
             -f /home/azureuser/CloudNativeApplicationCurse/backend/Dockerfile \
-            /home/azureuser/CloudNativeApplicationCurse
+            /home/azureuser/CloudNativeApplicationCurse/backend
 
       - name: Build frontend Docker image
         run: |
           docker build \
             -t frontend-ci-test \
             -f /home/azureuser/CloudNativeApplicationCurse/frontend/Dockerfile \
-            /home/azureuser/CloudNativeApplicationCurse
-
+            /home/azureuser/CloudNativeApplicationCurse/frontend
