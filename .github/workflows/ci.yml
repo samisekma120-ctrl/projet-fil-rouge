@@ -53,3 +53,18 @@ jobs:
             -t frontend-ci-test \
             -f /home/azureuser/CloudNativeApplicationCurse/frontend/Dockerfile \
             /home/azureuser/CloudNativeApplicationCurse/frontend
+      
+      # ===== SONARCLOUD ANALYSIS =====
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+            -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
+            -Dsonar.sources=.
+            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/build/**,**/.github/**
+            -Dsonar.sourceEncoding=UTF-8
+
